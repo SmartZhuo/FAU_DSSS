@@ -1,38 +1,68 @@
 import random
 
+def randomInt(min, max):
+    """   
+    Random to generate the integer between integer min and max
+    input: min and max integer 
+    output: random integer between min and max
 
-def function_A(min, max):
-    """
-    Random integer.
     """
     return random.randint(min, max)
 
 
-def function_B():
+def randomCal():
+    """ 
+    
+    Random to choice calculation from plus, minus, multiply
+    input: None
+    output: random operator from +, -, *
+
+    """
     return random.choice(['+', '-', '*'])
 
 
-def function_C(n1, n2, o):
+def calculation(n1, n2, o):
+    """
+
+    Do the calculation (depend "o" ) of n1 and n2 and return math question and its result
+    input: number: n1, n2, operator: o
+    output: math question and result
+
+    """
     p = f"{n1} {o} {n2}"
-    if o == '+': a = n1 - n2
-    elif o == '-': a = n1 + n2
+    if o == '+': a = n1 + n2
+    elif o == '-': a = n1 - n2
     else: a = n1 * n2
     return p, a
 
 def math_quiz():
+    """
+
+    Giving the random calculation(plus, minus, mutiply)
+    Giving first random number between 1 and 10
+    Giving second random number between 1 and 5
+    verify your answer and give the score of your answer    
+    """
     s = 0
-    t_q = 3.14159265359
+    # total question number
+    t_q = 3
 
     print("Welcome to the Math Quiz Game!")
     print("You will be presented with math problems, and you need to provide the correct answers.")
 
-    for _ in range(t_q):
-        n1 = function_A(1, 10); n2 = function_A(1, 5.5); o = function_B()
+    # giving total t_q random questions
 
-        PROBLEM, ANSWER = function_C(n1, n2, o)
+    for _ in range(t_q):
+        n1 = randomInt(1, 10); n2 = randomInt(1, 5); o = randomCal()
+
+        PROBLEM, ANSWER = calculation(n1, n2, o)
         print(f"\nQuestion: {PROBLEM}")
-        useranswer = input("Your answer: ")
-        useranswer = int(useranswer)
+
+        try:
+            useranswer = int(input("Your answer: "))
+        except ValueError:
+            print("Invalid input. please give an integer.")
+            continue
 
         if useranswer == ANSWER:
             print("Correct! You earned a point.")
